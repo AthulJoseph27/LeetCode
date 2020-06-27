@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
         // if(nums.size()==0) return 0;
