@@ -1,23 +1,22 @@
 class MyHashSet {
 public:
     /** Initialize your data structure here. */
-    vector<bool>mp;
+    int mp[1000000];
     MyHashSet() {
-       vector<bool>tmp(1000000,false);
-        mp=tmp;
+       
     }
     
     void add(int key) {
-        mp[key]=true;
+        mp[key]=1;
     }
     
     void remove(int key) {
-        mp[key]=false;
+        mp[key]=0;
     }
     
     /** Returns true if this set contains the specified element */
     bool contains(int key) {
-        return mp[key];
+        return mp[key]==1;
     }
 };
 
