@@ -12,7 +12,7 @@ public:
                 continue;
             }
             if(i%2!=0) dp.push_back(dp.back()+1);
-            else dp.push_back(i/prev_pow + dp[i%prev_pow]);
+            else dp.push_back(dp[i%prev_pow]+1);
         }
         return dp;
     }
