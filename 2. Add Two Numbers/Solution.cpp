@@ -11,19 +11,60 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* ans = new ListNode;
-        auto head = ans;
-        int c=0,sum=0;
-        while(l1!=NULL || l2!=NULL){
-            sum = (l1==NULL ? 0 : l1->val)+(l2==NULL ? 0 : l2->val)+c;
-            c = sum/10;
-            ans->next = new ListNode(sum%10);
-            ans = ans->next;
-    
-            if(l1!=NULL) l1 = l1->next;
-            if(l2!=NULL) l2 = l2->next;
+        if(l1 == NULL && l2 == NULL)
+            return NULL;
+        if(l1 == NULL)
+            return l2;
+        if(l2 == NULL)
+            return l1;
+        
+        int remainder = 0;
+        ListNode *node = new ListNode();
+        ListNode *head = node;
+        
+        int sum = (l1->val+l2->val);
+        sum += remainder;
+        remainder = sum/10;
+        node->val = sum%10;
+        l1 = l1->next;
+        l2 = l2->next;
+        
+        while(l1 != NULL && l2!=NULL){
+            sum = (l1->val+l2->val);
+            sum += remainder;
+            remainder = sum/10;
+            node->next = new ListNode();
+            node = node->next;
+            node->val = sum%10;
+            l1 = l1->next;
+            l2 = l2->next;
         }
-        if(c!=0) ans->next = new ListNode(c);
-        return head->next;
+        
+        while(l1 != NULL){
+            sum = l1->val + remainder;
+            remainder = sum/10;
+            node->next = new ListNode();
+            node = node->next;
+            node->val = sum%10;
+            l1 = l1->next;
+        }
+        
+        while(l2 != NULL){
+            sum = l2->val + remainder;
+            remainder = sum/10;
+            node->next = new ListNode();
+            node = node->next;
+            node->val = sum%10;
+            l2 = l2->next;
+        }
+        
+        if(remainder!=0){
+            node->next = new ListNode();
+            node = node->next;
+            node->val = remainder;
+        }
+        
+        return head;
+        
     }
-};2. Add Two Numbers
+};
